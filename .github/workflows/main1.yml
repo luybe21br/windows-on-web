@@ -1,0 +1,19 @@
+name: Create Windows VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deploy Windows VM
+        run: |
+          # Your deployment script here
+          # Replace placeholders with actual values
+          echo "Deploying Windows VM..."
+          # Example: az deployment group create --resource-group MyResourceGroup --template-file my-template.json
