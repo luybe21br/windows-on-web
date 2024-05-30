@@ -11,9 +11,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Generate random credentials
+        id: credentials
+        run: |
+          # Generate random IP address, username, and password
+          echo "::set-output name=ip::192.168.$((RANDOM % 256)).$((RANDOM % 256))"
+          echo "::set-output name=username::user$((RANDOM % 1000))"
+          echo "::set-output name=password::$(openssl rand -base64 12)"
+
       - name: Deploy Windows VM
         run: |
           # Your deployment script here
           # Replace placeholders with actual values
           echo "Deploying Windows VM..."
           # Example: az deployment group create --resource-group MyResourceGroup --template-file my-template.json
+
+          # Use the generated credentials
+          echo "IP address: ${{ steps.credentials.outputs.ip }}"
+          echo "Username: ${{ steps.credentials.outputs.username }}"
+          echo "Password: ${{ steps.credentials.outputs.password }}"
