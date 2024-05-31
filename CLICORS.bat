@@ -1,3 +1,3 @@
 @echo off
-echo CORS IS ENABLED
+echo CORS AND CLI IS ENABLED
 pause
